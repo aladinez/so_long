@@ -34,8 +34,6 @@ int		ft_keypressed(int key, t_data *data)
 		else if (key == 0)
 			x_sqr -= 1;	
 	}
-	// printf("collectibles = %d\n", data->collect);
-	
 	if ((data->map[y_sqr][x_sqr] == '0' || data->map[y_sqr][x_sqr] == 'C' || (data->map[y_sqr][x_sqr] == 'E' && data->collect == 0)) && (x_sqr != (data->x_player / TILE_SIZE) || y_sqr != (data->y_player / TILE_SIZE)))
 	{
 		printf("step count : %d\n", ++data->steps);

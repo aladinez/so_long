@@ -16,21 +16,26 @@ void    find_player(t_data *data)
 {
     int i;
 	int j;
+	int	player;
 
-	j = 0;
-	while (j < data->y_squares)
+	player = 0;
+	j = -1;
+	while (++j < data->y_squares)
 	{
-		i = 0;
-		while (i < data->x_squares)
+		i = -1;
+		while (++i < data->x_squares)
 		{
-			if (data->map[j][i] == 'P')
+			if (data->map[j][i] == 'P' && player == 1)
+				map_error();
+			else if (data->map[j][i] == 'P' && player == 0)
             {
+				player = 1;
                 data->map[j][i] = '0';
                 data->x_player = i * TILE_SIZE;
                 data->y_player = j * TILE_SIZE;
-            }	
-			i++;
+            }
 		}
-		j++;
 	}
+	if (!player)
+		map_error();
 }

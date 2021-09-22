@@ -148,7 +148,6 @@ void draw_map(t_data *data)
 	int j;
 	
 	j = 0;
-    data->collect = 0;
 	while (j < data->y_squares)
 	{
 		i = 0;
@@ -158,10 +157,7 @@ void draw_map(t_data *data)
 			if (data->map[j][i] == '1')
 				draw_wall(data, i * TILE_SIZE, j * TILE_SIZE);
 			else if (data->map[j][i] == 'C')
-            {
-                data->collect++;
 				draw_sprite(data, i * TILE_SIZE, j * TILE_SIZE);
-            }
 			else if (data->map[j][i] == 'E')
 				draw_exit(data, i * TILE_SIZE, j * TILE_SIZE);
             draw_player(data);
