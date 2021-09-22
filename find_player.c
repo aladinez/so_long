@@ -6,11 +6,11 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 14:59:45 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:31:42 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
 void	find_player(t_data *data)
 {

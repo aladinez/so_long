@@ -6,19 +6,17 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:35:13 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:53:55 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:45:58 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
 void	my_pixel_put(t_data *data, int x, int y, int color)
 {
 	int	*var;
-	int	index;
-	int	new_y;
 
-	var = (int*)mlx_get_data_addr(data->img_ptr, &g_bpp, &g_bpp, &g_bpp);
+	var = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp, &data->bpp, &data->bpp);
 	if (x < data->res_x && x >= 0 && y < data->res_y && y >= 0)
 	{
 		var[x + data->res_x * y] = color;
@@ -30,7 +28,7 @@ int	ft_render(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->res_x, data->res_y);
 	data->img_data = (int *)mlx_get_data_addr(data->img_ptr,
-			&g_bpp, &g_bpp, &g_bpp);
+			&data->bpp, &data->bpp, &data->bpp);
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
@@ -38,69 +36,35 @@ int	ft_render(t_data *data)
 
 void	get_texture_data(t_data *data)
 {
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/avatar.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[0] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/bricks.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[1] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/grass.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[2] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/sprite.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[3] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/exit.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[4] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/end.xpm"
-					, &data->img_width, &data->img_height);
-	data->text_data[5] = (int *)mlx_get_data_addr(data->text_img
-					, &g_bpp, &g_bpp, &g_bpp);
-}
-
-void	check_map_errors(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (data->map[0][++i])
-		if (data->map[0][i] != '1' || data->map[data->y_squares - 1][i] != '1')
-			map_error();
-	j = -1;
-	while (++j < data->y_squares)
-		if (data->map[j][0] != '1' || data->map[j][data->x_squares - 1] != '1')
-			map_error();
-	data->collect = 0;
-	j = 0;
-	while (j < data->y_squares)
-	{
-		i = 0;
-		while (i < data->x_squares)
-		{
-			if (data->map[j][i] == 'C')
-				data->collect++;
-			if (data->map[j][i] != 'P' && data->map[j][i] != 'C'
-				&& data->map[j][i] != 'E' && data->map[j][i] != '0'
-				&& data->map[j][i] != '1')
-				map_error();
-			i++;
-		}
-		j++;
-	}
-	if (!data->collect)
-		map_error();
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/avatar.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[0] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/bricks.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[1] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/grass.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[2] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/sprite.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[3] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/exit.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[4] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/end.xpm",
+			&data->img_width, &data->img_height);
+	data->text_data[5] = (int *)mlx_get_data_addr(data->text_img,
+			&data->bpp, &data->bpp, &data->bpp);
 }
 
 int	main(int argc, char *argv[])
 {
-    t_data	data;
+	t_data	data;
 
 	data.gameover = 0;
 	data.steps = 0;
@@ -112,17 +76,16 @@ int	main(int argc, char *argv[])
 	data.res_x = data.x_squares * TILE_SIZE;
 	data.res_y = data.y_squares * TILE_SIZE;
 	data.mlx_ptr = mlx_init();
-	data.win_ptr = mlx_new_window(data.mlx_ptr
-								, data.res_x, data.res_y, "Cub3D");
+	data.win_ptr = mlx_new_window(data.mlx_ptr,
+			data.res_x, data.res_y, "Cub3D");
 	data.img_ptr = mlx_new_image(data.mlx_ptr, data.res_x, data.res_y);
-	data.img_data = (int *)mlx_get_data_addr(data.img_ptr
-								, &g_bpp, &g_bpp, &g_bpp);
+	data.img_data = (int *)mlx_get_data_addr(data.img_ptr,
+			&data.bpp, &data.bpp, &data.bpp);
 	get_texture_data(&data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_hook(data.win_ptr, 2, 0, ft_keypressed, &data);
-	mlx_hook(data.win_ptr, 17, 0, exit_game, &data);     
+	mlx_hook(data.win_ptr, 17, 0, exit_game, &data);
 	mlx_loop_hook(data.mlx_ptr, ft_render, &data);
-    mlx_loop(data.mlx_ptr);
-    return (0);
+	mlx_loop(data.mlx_ptr);
+	return (0);
 }
-

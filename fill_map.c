@@ -6,11 +6,11 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:19:02 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:30:21 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
 int	ft_strlen(char *str)
 {

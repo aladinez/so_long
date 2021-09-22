@@ -6,11 +6,11 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 15:13:37 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:15:08 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
 void	draw_sprite(t_data *data, int x, int y)
 {

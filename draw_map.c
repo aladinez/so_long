@@ -6,11 +6,11 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 15:04:28 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:14:06 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
 void	draw_wall(t_data *data, int x, int y)
 {

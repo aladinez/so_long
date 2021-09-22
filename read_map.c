@@ -6,16 +6,16 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:36:38 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 15:27:55 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "SoLong.h"
+#include "header.h"
 
-void	map_error()
+void	map_error(void)
 {
 	printf("map Error\n");
-    exit(1);
+	exit(1);
 }
 
 void	read_map(t_data *data, char *file)
@@ -34,11 +34,11 @@ void	read_map(t_data *data, char *file)
 		{
 			data->y_squares++;
 			a = ft_strlen(line);
-            if (data->x_squares != 0 && a != data->x_squares)
+			if (data->x_squares != 0 && a != data->x_squares)
 				map_error();
 			data->x_squares = a;
 		}
-        else 
+		else
 			map_error();
 		free(line);
 		if (i == 0)
