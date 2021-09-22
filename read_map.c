@@ -12,6 +12,12 @@
 
 #include "SoLong.h"
 
+void	map_error()
+{
+	printf("map Error\n");
+    exit(1);
+}
+
 void	read_map(t_data *data, char *file)
 {
 	char	*line;
@@ -29,18 +35,12 @@ void	read_map(t_data *data, char *file)
 			data->y_squares++;
 			a = ft_strlen(line);
             if (data->x_squares != 0 && a != data->x_squares)
-            {
-                printf("map Errorhh\n");
-                exit(1);
-            }
+				map_error();
 			data->x_squares = a;
             
 		}
         else 
-        {
-            printf("map Error\n");
-            exit(1);
-        }
+			map_error();
 		free(line);
 		if (i == 0)
 			break ;

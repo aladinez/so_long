@@ -73,5 +73,6 @@ void	fill_map1(t_data *data, int i, char *line)
 		data->map[i][j] = line[j];
 		j++;
 	}
+	data->map[i][j] = 0;
 
 }

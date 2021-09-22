@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   SoLong.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcadmin <mcadmin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:37:24 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/19 17:36:05 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/20 15:52:27 by mcadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ typedef struct	s_data
 	int			y_player;
 	int			collect;
 	int			gameover;
+	int			steps;
+	void		*text_img;
+	int			*text_data[6];
+	int			img_height;
+	int			img_width;
 }				t_data;
 
 int				g_bpp;
@@ -56,6 +61,8 @@ void	my_pixel_put(t_data *data, int x, int y, int color);
 void draw_map(t_data *data);
 int		ft_keypressed(int key, t_data *data);
 int		ft_keyreleased(int key, t_data *data);
+int		exit_game(t_data *data);
+void	map_error();
 
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcadmin <mcadmin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:35:13 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/19 17:42:08 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/20 16:13:08 by mcadmin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,28 +44,62 @@ int		ft_render(t_data *data)
 	return (0);
 }
 
-// void	initialise(t_data *data)
-// {
-// 	data->collect = 0;
-// }
+
+void	get_texture_data(t_data *data)
+{
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/avatar.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[0] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/bricks.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[1] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/grass.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[2] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/sprite.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[3] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/exit.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[4] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+	data->text_img = mlx_xpm_file_to_image(data->mlx_ptr, "textures/end.xpm"
+					, &data->img_width, &data->img_height);
+	data->text_data[5] = (int *)mlx_get_data_addr(data->text_img
+					, &g_bpp, &g_bpp, &g_bpp);
+}
+
+void	check_map_errors(t_data *data)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (data->map[0][++i])
+		if (data->map[0][i] != '1' || data->map[data->y_squares - 1][i] != '1')
+			map_error();
+	j = -1;
+	while (++j < data->y_squares)
+		if (data->map[j][0] != '1' || data->map[j][data->x_squares - 1] != '1')
+			map_error();
+			// to check if this is working well.
+}
 
 int main(int argc, char *argv[])
 {
     t_data data;
 
 	data.gameover = 0;
+	data.steps = 0;
 	read_map(&data, argv[1]);
-	// printf("%d -- %d\n", data.y_squares, data.x_squares);
 	allocate_for_map(&data);
 	fill_map(&data, argv[1]);
+	check_map_errors(&data);
 	find_player(&data);
-    
-	int i =0;
-	while (data.map[i])
-	{
-		printf("%s\n", data.map[i]);
-		i++;
-	}
     data.res_x = data.x_squares * TILE_SIZE;
     data.res_y = data.y_squares * TILE_SIZE;
     data.mlx_ptr = mlx_init();
@@ -74,13 +108,9 @@ int main(int argc, char *argv[])
 	data.img_ptr = mlx_new_image(data.mlx_ptr, data.res_x, data.res_y);
 	data.img_data = (int *)mlx_get_data_addr(data.img_ptr
 								, &g_bpp, &g_bpp, &g_bpp);
-	
-
-
-
+	get_texture_data(&data);
 	mlx_put_image_to_window(data.mlx_ptr, data.win_ptr, data.img_ptr, 0, 0);
 	mlx_hook(data.win_ptr, 2, 0, ft_keypressed, &data);
-	// mlx_hook(data.win_ptr, 3, 0, ft_keyreleased, &data);
 	mlx_hook(data.win_ptr, 17, 0, exit_game, &data);     
 	mlx_loop_hook(data.mlx_ptr, ft_render, &data);
     mlx_loop(data.mlx_ptr);
