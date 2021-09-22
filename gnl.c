@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:30:25 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/17 15:39:11 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:42:54 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static char	*ft_strjoin(char *s, char c)
 	i = 0;
 	while (s[i])
 		i++;
-	if (!(str = (char *)malloc(i + 2)))
-		return (0);
+	str = (char *)malloc(i + 2);
 	i = 0;
 	while (s[i])
 	{
@@ -34,21 +33,28 @@ static char	*ft_strjoin(char *s, char c)
 	return (str);
 }
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, int *ret)
 {
 	char	*buffer;
 	int		flag;
 
 	buffer = (char *)malloc(2);
-	if (!line || !(*line = (char *)malloc(1)) || !buffer)
+	if (!line || !buffer)
+	{
+		*ret = -1;
 		return (-1);
+	}
+	*line = (char *)malloc(1);
 	*line[0] = '\0';
-	while ((flag = read(fd, buffer, 1)) > 0)
+	flag = read(fd, buffer, 1);
+	while (flag > 0)
 	{
 		if (buffer[0] == '\n')
 			break ;
 		*line = ft_strjoin(*line, buffer[0]);
+		flag = read(fd, buffer, 1);
 	}
 	free(buffer);
+	*ret = flag;
 	return (flag);
 }

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcadmin <mcadmin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/19 15:04:28 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/20 16:16:56 by mcadmin          ###   ########.fr       */
+/*   Updated: 2021/09/22 15:14:06 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SoLong.h"
 
-void draw_wall(t_data *data, int x, int y)
+void	draw_wall(t_data *data, int x, int y)
 {
-	int x1;
-	int y1;
-	int i;
+	int	x1;
+	int	y1;
+	int	i;
 
 	i = 0;
 	x1 = x + TILE_SIZE;
@@ -24,7 +24,8 @@ void draw_wall(t_data *data, int x, int y)
 	while (y < y1)
 	{
 		x = x1 - 64;
-		while (x < x1){
+		while (x < x1)
+		{
 			my_pixel_put(data, x, y, data->text_data[1][i]);
 			x++;
 			i++;
@@ -33,18 +34,19 @@ void draw_wall(t_data *data, int x, int y)
 	}
 }
 
-void draw_player(t_data *data)
+void	draw_player(t_data *data)
 {
-	int x;
-	int y;
-	int i;
+	int	x;
+	int	y;
+	int	i;
 
 	y = data->y_player;
 	i = 0;
 	while (y < data->y_player + TILE_SIZE)
 	{
 		x = data->x_player;
-		while (x < data->x_player + TILE_SIZE){
+		while (x < data->x_player + TILE_SIZE)
+		{
 			if (data->text_data[0][i] != data->text_data[0][0])
 				my_pixel_put(data, x, y, data->text_data[0][i]);
 			x++;
@@ -54,63 +56,20 @@ void draw_player(t_data *data)
 	}
 }
 
-void draw_sprite(t_data *data, int x, int y)
+void	draw_ground(t_data *data, int x, int y)
 {
-	int x1;
-	int y1;
-	int i;
-
-	i = 0;
-	x1 = x + TILE_SIZE;
-	y1 = y + TILE_SIZE;
-	while (y < y1)
-	{
-		x = x1 - 64;
-		while (x < x1){
-			if (data->text_data[3][i] != data->text_data[3][0])
-				my_pixel_put(data, x, y, data->text_data[3][i]);
-			x++;
-			i++;
-		}
-		y++;
-	}
-}
-
-void draw_exit(t_data *data, int x, int y)
-{
-	int x1;
-	int y1;
+	int	x1;
+	int	y1;
 	int	i;
 
-	x1 = x + TILE_SIZE;
-	y1 = y + TILE_SIZE;
-	i = 0;
-	while (y < y1)
-	{
-		x = x1 - 64;
-		while (x < x1){
-			if (data->text_data[4][i] != data->text_data[4][0])
-				my_pixel_put(data, x, y, data->text_data[4][i]);
-			x++;
-			i++;
-		}
-		y++;
-	}
-}
-
-void draw_ground(t_data *data, int x, int y)
-{
-	int x1;
-	int y1;
-	int i;
-
 	i = 0;
 	x1 = x + TILE_SIZE;
 	y1 = y + TILE_SIZE;
 	while (y < y1)
 	{
 		x = x1 - 64;
-		while (x < x1){
+		while (x < x1)
+		{
 			my_pixel_put(data, x, y, data->text_data[2][i]);
 			x++;
 			i++;
@@ -119,13 +78,13 @@ void draw_ground(t_data *data, int x, int y)
 	}
 }
 
-void    draw_over(t_data *data)
+void	draw_over(t_data *data)
 {
-    int i;
-    int j;
-	int x;
+	int	i;
+	int	j;
+	int	x;
 
-    x = 0;
+	x = 0;
 	j = data->res_y / 2 - 32;
 	while (j < data->res_y / 2 + 32)
 	{
@@ -138,15 +97,13 @@ void    draw_over(t_data *data)
 		}
 		j++;
 	}
-
 }
 
-
-void draw_map(t_data *data)
+void	draw_map(t_data *data)
 {
-	int i;
-	int j;
-	
+	int	i;
+	int	j;
+
 	j = 0;
 	while (j < data->y_squares)
 	{
@@ -160,10 +117,9 @@ void draw_map(t_data *data)
 				draw_sprite(data, i * TILE_SIZE, j * TILE_SIZE);
 			else if (data->map[j][i] == 'E')
 				draw_exit(data, i * TILE_SIZE, j * TILE_SIZE);
-            draw_player(data);
-            if (data->gameover)
-                draw_over(data);
-                
+			draw_player(data);
+			if (data->gameover)
+				draw_over(data);
 			i++;
 		}
 		j++;

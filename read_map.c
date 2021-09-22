@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:36:38 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/17 16:59:04 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:27:55 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	read_map(t_data *data, char *file)
 	fd = open(file, O_RDONLY);
 	data->x_squares = 0;
 	data->y_squares = 0;
-	while ((i = get_next_line(fd, &line)) >= 0)
+	while (get_next_line(fd, &line, &i) >= 0)
 	{
 		if (*line == '1')
 		{
@@ -37,7 +37,6 @@ void	read_map(t_data *data, char *file)
             if (data->x_squares != 0 && a != data->x_squares)
 				map_error();
 			data->x_squares = a;
-            
 		}
         else 
 			map_error();

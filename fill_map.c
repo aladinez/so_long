@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:19:02 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/17 17:05:20 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:30:21 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	ft_strlen(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-        i++;
-    return (i);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }
 
 void	allocate_for_map(t_data *data)
@@ -44,14 +44,14 @@ void	fill_map(t_data *data, char *argv)
 
 	i = 0;
 	fd = open(argv, O_RDONLY);
-	while ((ret = get_next_line(fd, &line)) >= 0)
+	while (get_next_line(fd, &line, &ret) >= 0)
 	{
 		if (*line == 0)
 		{
 			free(line);
 			if (!ret)
 				break ;
-			continue;
+			continue ;
 		}
 		if (*line == '1' || *line == ' ' || *line == '2'
 			|| *line == '0' || *line == '6')
@@ -74,5 +74,4 @@ void	fill_map1(t_data *data, int i, char *line)
 		j++;
 	}
 	data->map[i][j] = 0;
-
 }

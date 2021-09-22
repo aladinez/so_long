@@ -3,28 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcadmin <mcadmin@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:35:13 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/20 16:13:08 by mcadmin          ###   ########.fr       */
+/*   Updated: 2021/09/22 15:53:55 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "SoLong.h"
 
-int		exit_game(t_data *data)
-{
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-	exit(0);
-	return (0);
-}
-
 void	my_pixel_put(t_data *data, int x, int y, int color)
 {
-	int		*var;
-	int		index;
-	int		new_y;
+	int	*var;
+	int	index;
+	int	new_y;
 
 	var = (int*)mlx_get_data_addr(data->img_ptr, &g_bpp, &g_bpp, &g_bpp);
 	if (x < data->res_x && x >= 0 && y < data->res_y && y >= 0)
@@ -33,17 +25,16 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-int		ft_render(t_data *data)
+int	ft_render(t_data *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
 	data->img_ptr = mlx_new_image(data->mlx_ptr, data->res_x, data->res_y);
-	data->img_data = (int *)mlx_get_data_addr(data->img_ptr
-											, &g_bpp, &g_bpp, &g_bpp);
+	data->img_data = (int *)mlx_get_data_addr(data->img_ptr,
+			&g_bpp, &g_bpp, &g_bpp);
 	draw_map(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 	return (0);
 }
-
 
 void	get_texture_data(t_data *data)
 {
@@ -75,8 +66,8 @@ void	get_texture_data(t_data *data)
 
 void	check_map_errors(t_data *data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (data->map[0][++i])
@@ -107,9 +98,9 @@ void	check_map_errors(t_data *data)
 		map_error();
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    t_data data;
+    t_data	data;
 
 	data.gameover = 0;
 	data.steps = 0;
@@ -118,9 +109,9 @@ int main(int argc, char *argv[])
 	fill_map(&data, argv[1]);
 	check_map_errors(&data);
 	find_player(&data);
-    data.res_x = data.x_squares * TILE_SIZE;
-    data.res_y = data.y_squares * TILE_SIZE;
-    data.mlx_ptr = mlx_init();
+	data.res_x = data.x_squares * TILE_SIZE;
+	data.res_y = data.y_squares * TILE_SIZE;
+	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr
 								, data.res_x, data.res_y, "Cub3D");
 	data.img_ptr = mlx_new_image(data.mlx_ptr, data.res_x, data.res_y);
@@ -132,6 +123,6 @@ int main(int argc, char *argv[])
 	mlx_hook(data.win_ptr, 17, 0, exit_game, &data);     
 	mlx_loop_hook(data.mlx_ptr, ft_render, &data);
     mlx_loop(data.mlx_ptr);
-    return 0;
+    return (0);
 }
 
