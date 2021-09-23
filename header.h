@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 16:37:24 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 16:44:57 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:38:39 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define HEADER_H
 # define TILE_SIZE 64
 
+# include <mlx.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -50,7 +51,6 @@ void		fill_map(t_data *data, char *argv);
 void		fill_map1(t_data *data, int i, char *line);
 void		read_map(t_data *data, char *file);
 void		allocate_for_map(t_data *data);
-// static char	*ft_strjoin(char *s, char c);
 int			get_next_line(int fd, char **line, int *ret);
 void		find_player(t_data *data);
 void		my_pixel_put(t_data *data, int x, int y, int color);
@@ -66,7 +66,7 @@ void		draw_map(t_data *data);
 void		draw_sprite(t_data *data, int x, int y);
 void		draw_exit(t_data *data, int x, int y);
 int			ft_keypressed(int key, t_data *data);
-void		event_hanldling(t_data *data, int x_sqr, int y_sqr);
+void		event_handling(t_data *data, int x_sqr, int y_sqr);
 int			exit_game(t_data *data);
 void		map_error(void);
 

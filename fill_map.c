@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 15:19:02 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:37:58 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	allocate_for_map(t_data *data)
 {
 	int	i;
 
+	if (data->y_squares > 22 || data->x_squares > 40)
+	{
+		printf("Map resollution is too big\n");
+		exit(1);
+	}
 	i = 0;
 	data->map = (char **)malloc(data->y_squares * sizeof(char *));
 	while (i < data->y_squares)

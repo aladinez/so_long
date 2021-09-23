@@ -16,7 +16,8 @@ void	my_pixel_put(t_data *data, int x, int y, int color)
 {
 	int	*var;
 
-	var = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp, &data->bpp, &data->bpp);
+	var = (int *)mlx_get_data_addr(data->img_ptr, &data->bpp, &data->bpp,
+			&data->bpp);
 	if (x < data->res_x && x >= 0 && y < data->res_y && y >= 0)
 	{
 		var[x + data->res_x * y] = color;
@@ -62,12 +63,24 @@ void	get_texture_data(t_data *data)
 			&data->bpp, &data->bpp, &data->bpp);
 }
 
+int	initialize(t_data *data, int argc)
+{
+	if (argc != 2)
+	{
+		printf("Arguments Error\n");
+		return (0);
+	}
+	data->gameover = 0;
+	data->steps = 0;
+	return (1);
+}
+
 int	main(int argc, char *argv[])
 {
 	t_data	data;
 
-	data.gameover = 0;
-	data.steps = 0;
+	if (!initialize(&data, argc))
+		return (0);
 	read_map(&data, argv[1]);
 	allocate_for_map(&data);
 	fill_map(&data, argv[1]);

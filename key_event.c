@@ -6,7 +6,7 @@
 /*   By: aez-zaou <aez-zaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 18:22:30 by aez-zaou          #+#    #+#             */
-/*   Updated: 2021/09/22 16:37:06 by aez-zaou         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:38:39 by aez-zaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exit_game(t_data *data)
 	return (0);
 }
 
-void	event_hanldling(t_data *data, int x_sqr, int y_sqr)
+void	event_handling(t_data *data, int x_sqr, int y_sqr)
 {
 	if ((data->map[y_sqr][x_sqr] == '0' || data->map[y_sqr][x_sqr] == 'C'
 		|| (data->map[y_sqr][x_sqr] == 'E' && data->collect == 0))
@@ -60,6 +60,6 @@ int	ft_keypressed(int key, t_data *data)
 		else if (key == 0)
 			x_sqr -= 1;
 	}
-	event_hanldling(data, x_sqr, y_sqr);
+	event_handling(data, x_sqr, y_sqr);
 	return (0);
 }
