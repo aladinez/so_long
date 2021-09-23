@@ -15,7 +15,6 @@
 # define HEADER_H
 # define TILE_SIZE 64
 
-# include "mlx.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
@@ -51,7 +50,7 @@ void		fill_map(t_data *data, char *argv);
 void		fill_map1(t_data *data, int i, char *line);
 void		read_map(t_data *data, char *file);
 void		allocate_for_map(t_data *data);
-static char	*ft_strjoin(char *s, char c);
+// static char	*ft_strjoin(char *s, char c);
 int			get_next_line(int fd, char **line, int *ret);
 void		find_player(t_data *data);
 void		my_pixel_put(t_data *data, int x, int y, int color);
